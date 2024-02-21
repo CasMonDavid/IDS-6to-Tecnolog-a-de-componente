@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import CustomInput from './CustomInput';
+import CustomContrasena from './CustomContrasena';
 
 function App() {
   return (
@@ -9,8 +10,9 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <CustomInput label={"Nombre"} disabled={false} />
         <CustomInput label={"Apellido"} disabled={false}/>
-        <CustomInput label={"Contraseña"} disabled={false}/>
+        <CustomContrasena label={"Contraseña"} disabled={false}/>
         <button variant="outlined">Enviar</button>
+        <button variant="outlinne" disabled={true}>Cancelar</button>
       </header>
     </div>
   );
