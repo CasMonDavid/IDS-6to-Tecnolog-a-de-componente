@@ -19,7 +19,6 @@ function Finder({texto, foundPokemon}) {
     
   }
 
-
   return (
     <Row>
       <h1>{name}</h1>

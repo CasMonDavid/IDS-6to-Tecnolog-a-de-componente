@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+import logo from './LogoPokemon.png';
 import './App.css';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -9,6 +9,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useEffect, useState } from "react";
 import Finder from "./Components/Finder.js";
+import PokedexFrame from './Components/PokedexFrame.js';
 
 function App() {
 
@@ -24,7 +25,6 @@ function App() {
     fetch(URL)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.results);
         setPokemonList(data.results);
       });
   }, []);
@@ -33,38 +33,20 @@ function App() {
     <div>
       <div className='banner'>
         <img src={logo} alt='Logo' className='logo' />
-        <h1>Recetas de cocina</h1>
+        <h1>Buscador Pokemon: Primera Generación</h1>
       </div>
       <div className='barra-busqueda'>
-        <div className='inputBusqueda'>
-          <InputGroup className="mb-3 inputBusqueda">
-            <Form.Control
-              placeholder="Nombre de la receta"
-              aria-label="Nombre de la receta"
-              aria-describedby="basic-addon2"
-            />
-            <Button variant="outline-secondary" id="button-addon2">
-              Buscar
-            </Button>
-          </InputGroup>
-        </div>
+        <Container>
+          <Finder texto={"Buscar Pokemon"} foundPokemon={setPokemon} />
+        </Container>
       </div>
       <div>
         <Container>
-          {/* <Encabezado logo={logo} titulo={"Juegos"} /> */}
-          <Finder texto={"Buscar Pokemon"} foundPokemon={setPokemon} />
-
-          {pokemon && (
-            <PokemonCard
-              name={pokemon.name}
-              image={pokemon.sprites.front_default}
-            />
-          )}
-
-          {/*       
-            {pokemonList.map((pokemon, num) => (
-              <PokemonCard name={pokemon.name} image={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${num+1}.png`} />
-            ))} */}
+          <Row>
+            {pokemonList.map((pokemon, index) => (
+              <PokedexFrame key={index} name={pokemon.name} url={pokemonList.url} />
+            ))} 
+          </Row>
         </Container>
       </div>
     </div>
