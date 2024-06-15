@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import PokeCard from "./PokeCard.jsx";
 
-const PokedexFrame = () => {
+const PokedexFrame = ({ lookPokemon }) => {
     const [data, setData] = useState([]);
+    const [dataFiltered, setDataFiltered] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    //JALA TODO DE LA POKEAPI PRINCIPAL
     const fetchData = async () => {
         try {
             const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151&offset=0');
@@ -18,6 +20,19 @@ const PokedexFrame = () => {
         }
     };
 
+    //FILTRA LOS VALORES DESEADOS
+    useEffect(() => {
+        if (!lookPokemon){
+            setDataFiltered(data);
+            return;
+        }
+        
+        const filtered = data.filter(pokemon =>
+            pokemon.name.includes(lookPokemon.toLowerCase())
+        );
+        setDataFiltered(filtered);
+    }, [lookPokemon, data]);
+
     useEffect(() => {
         fetchData();
     }, []);
@@ -29,7 +44,7 @@ const PokedexFrame = () => {
     return (
         <Container>
             <Row xs={1} md={2} lg={3} xl={4} className="g-4">
-                {data.map((pokemon, index) => (
+                {dataFiltered.map((pokemon, index) => (
                     <Col>
                         <PokeCard
                             key={index}

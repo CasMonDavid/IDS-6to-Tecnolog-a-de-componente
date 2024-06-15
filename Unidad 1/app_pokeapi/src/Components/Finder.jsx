@@ -4,6 +4,13 @@ import PokedexFrame from './PokedexFrame.jsx';
 import "./Finder.css"
 
 const Finder = () => {
+
+    const [lookPokemon, setLookPokemon] = useState("");
+
+    const searchChange = (e) => {
+        setLookPokemon(e.target.value);
+    }
+
     return(
         <div>
             <div className="bar">
@@ -13,12 +20,18 @@ const Finder = () => {
                 </div>
                 <div className="finder">
                     <label>Buscar Pokemon:</label>
-                    <input placeholder="charizard"></input>
-                    <button>Buscar</button>
+                    <input
+                        placeholder="charizard"
+                        value={lookPokemon}
+                        onChange={searchChange}
+                    />
+                    <button onClick={() => setLookPokemon(lookPokemon)}>Buscar</button>
                 </div>
             </div>
             <div className='body'>
-                <PokedexFrame/>
+                <PokedexFrame
+                lookPokemon={lookPokemon}
+                />
             </div>
         </div>
     )

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Spinner from 'react-bootstrap/Spinner';
+import "./PokeCard.css";
 
 const Card = ({ url, name }) => {
     const [data, setData] = useState([]);
@@ -26,8 +27,9 @@ const Card = ({ url, name }) => {
     };
 
     useEffect(() => {
+        setLoading(true);
         fetchData();
-    }, []);
+    }, [url]);
 
     if (loading) {
         return (
@@ -40,7 +42,7 @@ const Card = ({ url, name }) => {
     return (
         <div className="container-card">
             <div className="image-title">
-                <img src={sprite} alt={name} />
+                <img src={sprite} alt={name} className="imgage" />
                 <h3>{name}</h3>
             </div> 
             <div>
